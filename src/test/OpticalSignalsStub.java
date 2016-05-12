@@ -1,31 +1,34 @@
 package test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import boundaryclasses.IOpticalSignals;
 
 public class OpticalSignalsStub implements IOpticalSignals {
 
+	Map lampeLog = new HashMap<String, Integer>(); 
+	
 	@Override
 	public void switchLampAOn() {
-		// TODO Auto-generated method stub
-
+		System.out.println(">Lampe A on");
+		lampeLog.put("cntAon", lampeLog.get("cntAon")++);
+		lampeLog.get("Lampe A");
 	}
 
 	@Override
 	public void switchLampAOff() {
-		// TODO Auto-generated method stub
-
+		System.out.println(">Lampe A off");
 	}
 
 	@Override
 	public void switchLampBOn() {
-		// TODO Auto-generated method stub
-
+		System.out.println(">Lampe B on");
 	}
 
 	@Override
 	public void switchLampBOff() {
-		// TODO Auto-generated method stub
-
+		System.out.println(">Lampe B off");
 	}
 
 }

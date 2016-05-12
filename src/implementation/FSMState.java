@@ -1,5 +1,5 @@
 package implementation;
 
 public enum FSMState {
-	HumidityOkay
+	HumidityOkay, HumidityOverMax, HumidityUnderMin
 }

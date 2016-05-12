@@ -4,16 +4,19 @@ import boundaryclasses.IHumidifier;
 
 public class HumidifierStub implements IHumidifier {
 
+	private boolean humidifierActivated;
+	
 	@Override
 	public void sendSprayOn() {
-		// TODO Auto-generated method stub
-
+		System.out.println(">Spray ON");
+		humidifierActivated = true;
+		
 	}
 
 	@Override
 	public void sendSprayOff() {
-		// TODO Auto-generated method stub
-
+		System.out.println(">Spray OFF");
+		humidifierActivated = false;
 	}
 
 }

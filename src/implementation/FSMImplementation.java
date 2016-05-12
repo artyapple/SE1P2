@@ -1,4 +1,5 @@
 package implementation;
+
 import boundaryclasses.IGate;
 import boundaryclasses.IHumidifier;
 import boundaryclasses.IHumiditySensor;
@@ -6,7 +7,6 @@ import boundaryclasses.IManualControl;
 import boundaryclasses.IOpticalSignals;
 import boundaryclasses.IPump;
 import fsm.IFSM;
-
 
 public class FSMImplementation implements IFSM {
 	private FSMState state;
@@ -20,8 +20,8 @@ public class FSMImplementation implements IFSM {
 	private final double upperBound;
 	private final double lowerBound;
 
-	public FSMImplementation( IPump pumpA, IPump pumpB, IGate gate, IOpticalSignals signals,
-			IHumidifier humidifier, IHumiditySensor sensor, IManualControl operatorPanel) {
+	public FSMImplementation(IPump pumpA, IPump pumpB, IGate gate, IOpticalSignals signals, IHumidifier humidifier,
+			IHumiditySensor sensor, IManualControl operatorPanel) {
 		this.state = FSMState.HumidityOkay;
 		this.pumpA = pumpA;
 		this.pumpB = pumpB;
@@ -33,10 +33,25 @@ public class FSMImplementation implements IFSM {
 		upperBound = 60;
 		lowerBound = 20;
 	}
-	
+
 	@Override
 	public void evaluate() {
-		// TODO Auto-generated method stub
+
+		switch (state) {
+		case HumidityOkay:
+			//doSome
+			break;
+		case HumidityUnderMin:
+			signals.
+			break;
+		case HumidityOverMax:
+			//dos
+			break;
+		default:
+		//fehlermeldung
+		break;
+		}
+
 	}
 
 }

@@ -1,25 +1,31 @@
 package test;
 
+import org.junit.experimental.theories.Theories;
+
 import boundaryclasses.IPump;
 
 public class PumpStub implements IPump {
+	
+	private boolean pumpActivated;
+	private static int pumpNumber = 1; 
 
 	@Override
 	public void sendActivate() {
-		// TODO Auto-generated method stub
-
+		System.out.println("activate Pump " +pumpNumber);
+		pumpNumber++;
+		pumpActivated = true;
 	}
 
 	@Override
 	public void sendDeactivate() {
-		// TODO Auto-generated method stub
-
+		System.out.println("activate Pump " +pumpNumber);
+		pumpNumber--;
+		pumpActivated = false;
 	}
 
 	@Override
 	public boolean receivedActivated() {
-		// TODO Auto-generated method stub
-		return false;
+		return pumpActivated;
 	}
 
 }

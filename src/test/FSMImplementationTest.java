@@ -44,7 +44,8 @@ public class FSMImplementationTest {
 	
 	@Test
 	public void testPath() {
-
+		uut.evaluate();
+		assertArrayEquals(expecteds, gate.);	
 	}
 
 }
