@@ -1,19 +1,29 @@
 package test;
 
-import fsm.ITimer;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import boundaryclasses.ITimer;
 
 public class TimerStub implements ITimer {
 
+	private boolean timerExpired;
+
 	@Override
 	public void startTime(double seconds) {
-		// TODO Auto-generated method stub
-
+		timerExpired = false;
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				timerExpired = true;
+			}
+		}, (long) (seconds * 1000));
 	}
 
 	@Override
 	public boolean isTimerExpired() {
-		// TODO Auto-generated method stub
-		return false;
+		return timerExpired;
 	}
 
 }

@@ -7,13 +7,11 @@ import boundaryclasses.IOpticalSignals;
 
 public class OpticalSignalsStub implements IOpticalSignals {
 
-	Map lampeLog = new HashMap<String, Integer>(); 
-	
+	Map lampeLog = new HashMap<String, Integer>();
+
 	@Override
 	public void switchLampAOn() {
 		System.out.println(">Lampe A on");
-		lampeLog.put("cntAon", lampeLog.get("cntAon")++);
-		lampeLog.get("Lampe A");
 	}
 
 	@Override
