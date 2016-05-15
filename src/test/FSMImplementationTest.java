@@ -1,4 +1,5 @@
 package test;
+
 /**
  * Test Framework for testing the FSM from Practice 3
  * @author Thomas Lehmann
@@ -28,24 +29,28 @@ public class FSMImplementationTest {
 	private HumidifierStub humidifier;
 	private ManualControlStub operatorPanel;
 	private IFSM uut;
+	private TimerStub timer; 
 
 	@Before
-	public void testSetup(){
-		pumpA = new PumpStub();
-		pumpB = new PumpStub();
+	public void testSetup() {
 		gate = new GateStub();
 		signals = new OpticalSignalsStub();
-		sensor = new HumiditySensorStub();
-		humidifier = new HumidifierStub();
+		sensor = new HumiditySensorStub(100);
+		pumpA = new PumpStub(sensor);
+		pumpB = new PumpStub(sensor);
+		humidifier = new HumidifierStub(sensor);
 		operatorPanel = new ManualControlStub();
-		uut = new FSMImplementation(  pumpA,  pumpB,  gate,  signals,
-				humidifier,  sensor,  operatorPanel) ;
+		timer = new TimerStub();
+		uut = new FSMImplementation(pumpA, pumpB, gate, signals, humidifier, sensor, operatorPanel, timer);
 	}
-	
+
 	@Test
 	public void testPath() {
 		uut.evaluate();
-		assertArrayEquals(expecteds, gate.);	
+		
+		assertEquals(2, GateStub.getGateActivity());
+		assertEquals(4, PumpStub.getPumpActivity());
+		assertEquals(4, OpticalSignalsStub.getLampActivCount());
 	}
 
 }
