@@ -31,26 +31,8 @@ public interface IPump {
 	 */
 	public boolean receivedActivated();
 
-	/**
-	 * Activate timer & 2 Pumps
-	 */
-	public static void startPumps(IPump pump1, IPump pump2, ITimer timer) {
-		timer.startTime(5);
-		pump1.sendActivate();
-		pump2.sendActivate();
-	}
 	
-	/**
-	 * Check 2 Pumps
-	 * 
-	 * @return true - Pumps are activated, otherwise false 
-	 */
-	public static boolean pumpsActivated(IPump pump1, IPump pump2, ITimer timer) {
-		while (!timer.isTimerExpired()) {
-			if (pump1.receivedActivated() && pump2.receivedActivated()) {
-				return true;
-			}
-		}
-		return false;
-	}
+	
+	
+	
 }

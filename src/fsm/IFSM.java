@@ -10,4 +10,6 @@ public interface IFSM {
 	 *  output actions.
 	 */
 	public void evaluate();
+
+	public Object getCurrentState();
 }

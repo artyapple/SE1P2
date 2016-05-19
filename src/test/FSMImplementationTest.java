@@ -25,32 +25,56 @@ public class FSMImplementationTest {
 	private PumpStub pumpB;
 	private GateStub gate;
 	private OpticalSignalsStub signals;
-	private HumiditySensorStub sensor;
+	private HumiditySensorStub sensor1;
+	private HumiditySensorStub sensor2;
 	private HumidifierStub humidifier;
 	private ManualControlStub operatorPanel;
 	private IFSM uut;
-	private TimerStub timer; 
+	private IFSM hut;
+	private TimerStub timer;
+	private PumpStub pumpC;
+	private PumpStub pumpD; 
 
 	@Before
 	public void testSetup() {
 		gate = new GateStub();
 		signals = new OpticalSignalsStub();
-		sensor = new HumiditySensorStub(100);
-		pumpA = new PumpStub(sensor);
-		pumpB = new PumpStub(sensor);
-		humidifier = new HumidifierStub(sensor);
+		sensor1 = new HumiditySensorStub(10);
+		sensor2 = new HumiditySensorStub(100);
+		pumpA = new PumpStub(sensor1);
+		pumpB = new PumpStub(sensor1);
+		pumpC = new PumpStub(sensor2);
+		pumpD = new PumpStub(sensor2);
+		HumidifierStub humidifierA = new HumidifierStub(sensor1);
+		HumidifierStub humidifierB = new HumidifierStub(sensor2);
 		operatorPanel = new ManualControlStub();
 		timer = new TimerStub();
-		uut = new FSMImplementation(pumpA, pumpB, gate, signals, humidifier, sensor, operatorPanel, timer);
+		uut = new FSMImplementation(pumpA, pumpB, gate, signals, humidifierA, sensor1, operatorPanel, timer);
+		hut = new FSMImplementation(pumpC, pumpD, gate, signals, humidifierB, sensor2, operatorPanel, timer);
+		
 	}
 
 	@Test
 	public void testPath() {
-		uut.evaluate();
+		uut.evaluate(); //Hunidity ok
+		uut.evaluate(); //Humidity low
+		assertEquals(0, GateStub.getGateActivity());
+		assertEquals(0, PumpStub.getPumpActivity());
+		assertEquals(2, OpticalSignalsStub.getLampActivCount());
+		
+		hut.evaluate(); //Humidity ok
+		hut.evaluate(); //Humidity high
 		
 		assertEquals(2, GateStub.getGateActivity());
 		assertEquals(4, PumpStub.getPumpActivity());
-		assertEquals(4, OpticalSignalsStub.getLampActivCount());
+		assertEquals(6, OpticalSignalsStub.getLampActivCount());
+		
+		hut.evaluate(); //Error state 
+		assertEquals(1, ManualControlStub.getErrorCnt());
+		assertEquals(FSMState.HumidityOkay, hut.getCurrentState()); //Humidity ok
+		
+		
+		
 	}
 
 }
