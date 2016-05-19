@@ -7,23 +7,20 @@ import boundaryclasses.ITimer;
 
 public class TimerStub implements ITimer {
 
-	private boolean timerExpired;
 
+	private double duration;
+    private long startTime;
+    
 	@Override
 	public void startTime(double seconds) {
-		timerExpired = false;
-		Timer timer = new Timer();
-		timer.schedule(new TimerTask() {
-			@Override
-			public void run() {
-				timerExpired = true;
-			}
-		}, (long) (seconds * 1000));
+	    duration = seconds;
+	    startTime = System.nanoTime();
+	    System.out.println("start timer for " + seconds + " seconds");
 	}
 
 	@Override
 	public boolean isTimerExpired() {
-		return timerExpired;
+	    return (System.nanoTime() - startTime)/1E9 >= duration;
 	}
 
 }

@@ -1,7 +1,5 @@
 package test;
 
-import org.junit.experimental.theories.Theories;
-
 import boundaryclasses.IPump;
 
 public class PumpStub implements IPump {

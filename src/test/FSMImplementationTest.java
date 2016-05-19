@@ -63,13 +63,15 @@ public class FSMImplementationTest {
 		assertEquals(2, OpticalSignalsStub.getLampActivCount());
 		
 		hut.evaluate(); //Humidity ok
+		hut.evaluate(); //tor schliessen
 		hut.evaluate(); //Humidity high
+		hut.evaluate(); //tor offnen
 		
 		assertEquals(2, GateStub.getGateActivity());
 		assertEquals(4, PumpStub.getPumpActivity());
 		assertEquals(6, OpticalSignalsStub.getLampActivCount());
 		
-		hut.evaluate(); //Error state 
+		hut.evaluate(); //Error state
 		assertEquals(1, ManualControlStub.getErrorCnt());
 		assertEquals(FSMState.HumidityOkay, hut.getCurrentState()); //Humidity ok
 		
